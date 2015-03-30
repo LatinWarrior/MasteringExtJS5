@@ -1,0 +1,1720 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SakilaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="actor">
+          <Key>
+            <PropertyRef Name="actor_id" />
+          </Key>
+          <Property Name="actor_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="address">
+          <Key>
+            <PropertyRef Name="address_id" />
+          </Key>
+          <Property Name="address_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="address2" Type="varchar" MaxLength="50" />
+          <Property Name="district" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="city_id" Type="int" Nullable="false" />
+          <Property Name="postal_code" Type="varchar" MaxLength="10" />
+          <Property Name="phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="city">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="city_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="country_id" Type="smallint" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="country_id" />
+          </Key>
+          <Property Name="country_id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_update" Type="datetime" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="store_id" Type="int" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="address_id" Type="int" Nullable="false" />
+          <Property Name="active" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="film">
+          <Key>
+            <PropertyRef Name="film_id" />
+          </Key>
+          <Property Name="film_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="release_year" Type="varchar" MaxLength="4" />
+          <Property Name="language_id" Type="tinyint" Nullable="false" />
+          <Property Name="original_language_id" Type="tinyint" />
+          <Property Name="rental_duration" Type="tinyint" Nullable="false" />
+          <Property Name="rental_rate" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="length" Type="smallint" />
+          <Property Name="replacement_cost" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="rating" Type="varchar" MaxLength="10" />
+          <Property Name="special_features" Type="varchar" MaxLength="255" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="film_actor">
+          <Key>
+            <PropertyRef Name="actor_id" />
+            <PropertyRef Name="film_id" />
+          </Key>
+          <Property Name="actor_id" Type="int" Nullable="false" />
+          <Property Name="film_id" Type="int" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="film_category">
+          <Key>
+            <PropertyRef Name="film_id" />
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="film_id" Type="int" Nullable="false" />
+          <Property Name="category_id" Type="tinyint" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="film_text">
+          <Key>
+            <PropertyRef Name="film_id" />
+          </Key>
+          <Property Name="film_id" Type="smallint" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="description" Type="text" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="inventory">
+          <Key>
+            <PropertyRef Name="inventory_id" />
+          </Key>
+          <Property Name="inventory_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="film_id" Type="int" Nullable="false" />
+          <Property Name="store_id" Type="int" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="language">
+          <Key>
+            <PropertyRef Name="language_id" />
+          </Key>
+          <Property Name="language_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payment">
+          <Key>
+            <PropertyRef Name="payment_id" />
+          </Key>
+          <Property Name="payment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="staff_id" Type="tinyint" Nullable="false" />
+          <Property Name="rental_id" Type="int" />
+          <Property Name="amount" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="payment_date" Type="datetime" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rental">
+          <Key>
+            <PropertyRef Name="rental_id" />
+          </Key>
+          <Property Name="rental_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rental_date" Type="datetime" Nullable="false" />
+          <Property Name="inventory_id" Type="int" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="return_date" Type="datetime" />
+          <Property Name="staff_id" Type="tinyint" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="staff_id" />
+          </Key>
+          <Property Name="staff_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="address_id" Type="int" Nullable="false" />
+          <Property Name="picture" Type="image" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="store_id" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="40" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="store">
+          <Key>
+            <PropertyRef Name="store_id" />
+          </Key>
+          <Property Name="store_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="manager_staff_id" Type="tinyint" Nullable="false" />
+          <Property Name="address_id" Type="int" Nullable="false" />
+          <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="100" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Sakila.dbo.customer_list' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="customer_list">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="phone" />
+            <PropertyRef Name="city" />
+            <PropertyRef Name="country" />
+            <PropertyRef Name="notes" />
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="91" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="zip_code" Type="varchar" MaxLength="10" />
+          <Property Name="phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="country" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="notes" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="SID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Sakila.dbo.film_list' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="film_list">
+          <Key>
+            <PropertyRef Name="category" />
+            <PropertyRef Name="actors" />
+          </Key>
+          <Property Name="FID" Type="int" />
+          <Property Name="title" Type="varchar" MaxLength="255" />
+          <Property Name="description" Type="text" />
+          <Property Name="category" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="length" Type="smallint" />
+          <Property Name="rating" Type="varchar" MaxLength="10" />
+          <Property Name="actors" Type="varchar" MaxLength="91" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Sakila.dbo.sales_by_film_category' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sales_by_film_category">
+          <Key>
+            <PropertyRef Name="category" />
+          </Key>
+          <Property Name="category" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="total_sales" Type="decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Sakila.dbo.sales_by_store' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sales_by_store">
+          <Key>
+            <PropertyRef Name="store_id" />
+            <PropertyRef Name="store" />
+            <PropertyRef Name="manager" />
+          </Key>
+          <Property Name="store_id" Type="int" Nullable="false" />
+          <Property Name="store" Type="varchar" MaxLength="101" Nullable="false" />
+          <Property Name="manager" Type="varchar" MaxLength="91" Nullable="false" />
+          <Property Name="total_sales" Type="decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Sakila.dbo.staff_list' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="staff_list">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="phone" />
+            <PropertyRef Name="city" />
+            <PropertyRef Name="country" />
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="91" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="zip_code" Type="varchar" MaxLength="10" />
+          <Property Name="phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="country" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_address_city">
+          <End Role="city" Type="Self.city" Multiplicity="1" />
+          <End Role="address" Type="Self.address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="address">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_city_country">
+          <End Role="country" Type="Self.country" Multiplicity="1" />
+          <End Role="city" Type="Self.city" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="country_id" />
+            </Principal>
+            <Dependent Role="city">
+              <PropertyRef Name="country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_customer_address">
+          <End Role="address" Type="Self.address" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_customer_store">
+          <End Role="store" Type="Self.store" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="store">
+              <PropertyRef Name="store_id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_film_actor_actor">
+          <End Role="actor" Type="Self.actor" Multiplicity="1" />
+          <End Role="film_actor" Type="Self.film_actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="actor">
+              <PropertyRef Name="actor_id" />
+            </Principal>
+            <Dependent Role="film_actor">
+              <PropertyRef Name="actor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_film_actor_film">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="film_actor" Type="Self.film_actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="film_id" />
+            </Principal>
+            <Dependent Role="film_actor">
+              <PropertyRef Name="film_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_film_category_category">
+          <End Role="category" Type="Self.category" Multiplicity="1" />
+          <End Role="film_category" Type="Self.film_category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="film_category">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_film_category_film">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="film_category" Type="Self.film_category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="film_id" />
+            </Principal>
+            <Dependent Role="film_category">
+              <PropertyRef Name="film_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_film_language">
+          <End Role="language" Type="Self.language" Multiplicity="1" />
+          <End Role="film" Type="Self.film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="language">
+              <PropertyRef Name="language_id" />
+            </Principal>
+            <Dependent Role="film">
+              <PropertyRef Name="language_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_film_language_original">
+          <End Role="language" Type="Self.language" Multiplicity="0..1" />
+          <End Role="film" Type="Self.film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="language">
+              <PropertyRef Name="language_id" />
+            </Principal>
+            <Dependent Role="film">
+              <PropertyRef Name="original_language_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_inventory_film">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="inventory" Type="Self.inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="film_id" />
+            </Principal>
+            <Dependent Role="inventory">
+              <PropertyRef Name="film_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_inventory_store">
+          <End Role="store" Type="Self.store" Multiplicity="1" />
+          <End Role="inventory" Type="Self.inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="store">
+              <PropertyRef Name="store_id" />
+            </Principal>
+            <Dependent Role="inventory">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_payment_customer">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_payment_rental">
+          <End Role="rental" Type="Self.rental" Multiplicity="0..1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rental">
+              <PropertyRef Name="rental_id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="rental_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_payment_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rental_customer">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="rental" Type="Self.rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="rental">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rental_inventory">
+          <End Role="inventory" Type="Self.inventory" Multiplicity="1" />
+          <End Role="rental" Type="Self.rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="inventory">
+              <PropertyRef Name="inventory_id" />
+            </Principal>
+            <Dependent Role="rental">
+              <PropertyRef Name="inventory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rental_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="rental" Type="Self.rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="rental">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_staff_address">
+          <End Role="address" Type="Self.address" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_staff_store">
+          <End Role="store" Type="Self.store" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="store">
+              <PropertyRef Name="store_id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_store_address">
+          <End Role="address" Type="Self.address" Multiplicity="1" />
+          <End Role="store" Type="Self.store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="store">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_store_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="store" Type="Self.store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="store">
+              <PropertyRef Name="manager_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SakilaModelStoreContainer">
+          <EntitySet Name="actor" EntityType="Self.actor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="address" EntityType="Self.address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="city" EntityType="Self.city" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="film" EntityType="Self.film" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="film_actor" EntityType="Self.film_actor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="film_category" EntityType="Self.film_category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="film_text" EntityType="Self.film_text" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="inventory" EntityType="Self.inventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="language" EntityType="Self.language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payment" EntityType="Self.payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rental" EntityType="Self.rental" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="store" EntityType="Self.store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer_list" EntityType="Self.customer_list" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [customer_list].[ID] AS [ID], 
+    [customer_list].[name] AS [name], 
+    [customer_list].[address] AS [address], 
+    [customer_list].[zip_code] AS [zip_code], 
+    [customer_list].[phone] AS [phone], 
+    [customer_list].[city] AS [city], 
+    [customer_list].[country] AS [country], 
+    [customer_list].[notes] AS [notes], 
+    [customer_list].[SID] AS [SID]
+    FROM [dbo].[customer_list] AS [customer_list]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="film_list" EntityType="Self.film_list" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [film_list].[FID] AS [FID], 
+    [film_list].[title] AS [title], 
+    [film_list].[description] AS [description], 
+    [film_list].[category] AS [category], 
+    [film_list].[price] AS [price], 
+    [film_list].[length] AS [length], 
+    [film_list].[rating] AS [rating], 
+    [film_list].[actors] AS [actors]
+    FROM [dbo].[film_list] AS [film_list]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sales_by_film_category" EntityType="Self.sales_by_film_category" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sales_by_film_category].[category] AS [category], 
+    [sales_by_film_category].[total_sales] AS [total_sales]
+    FROM [dbo].[sales_by_film_category] AS [sales_by_film_category]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sales_by_store" EntityType="Self.sales_by_store" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sales_by_store].[store_id] AS [store_id], 
+    [sales_by_store].[store] AS [store], 
+    [sales_by_store].[manager] AS [manager], 
+    [sales_by_store].[total_sales] AS [total_sales]
+    FROM [dbo].[sales_by_store] AS [sales_by_store]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="staff_list" EntityType="Self.staff_list" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [staff_list].[ID] AS [ID], 
+    [staff_list].[name] AS [name], 
+    [staff_list].[address] AS [address], 
+    [staff_list].[zip_code] AS [zip_code], 
+    [staff_list].[phone] AS [phone], 
+    [staff_list].[city] AS [city], 
+    [staff_list].[country] AS [country], 
+    [staff_list].[SID] AS [SID]
+    FROM [dbo].[staff_list] AS [staff_list]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_address_city" Association="Self.fk_address_city">
+            <End Role="city" EntitySet="city" />
+            <End Role="address" EntitySet="address" />
+          </AssociationSet>
+          <AssociationSet Name="fk_city_country" Association="Self.fk_city_country">
+            <End Role="country" EntitySet="country" />
+            <End Role="city" EntitySet="city" />
+          </AssociationSet>
+          <AssociationSet Name="fk_customer_address" Association="Self.fk_customer_address">
+            <End Role="address" EntitySet="address" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_customer_store" Association="Self.fk_customer_store">
+            <End Role="store" EntitySet="store" />
+            <End Role="customer" EntitySet="customer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_film_actor_actor" Association="Self.fk_film_actor_actor">
+            <End Role="actor" EntitySet="actor" />
+            <End Role="film_actor" EntitySet="film_actor" />
+          </AssociationSet>
+          <AssociationSet Name="fk_film_actor_film" Association="Self.fk_film_actor_film">
+            <End Role="film" EntitySet="film" />
+            <End Role="film_actor" EntitySet="film_actor" />
+          </AssociationSet>
+          <AssociationSet Name="fk_film_category_category" Association="Self.fk_film_category_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="film_category" EntitySet="film_category" />
+          </AssociationSet>
+          <AssociationSet Name="fk_film_category_film" Association="Self.fk_film_category_film">
+            <End Role="film" EntitySet="film" />
+            <End Role="film_category" EntitySet="film_category" />
+          </AssociationSet>
+          <AssociationSet Name="fk_film_language" Association="Self.fk_film_language">
+            <End Role="language" EntitySet="language" />
+            <End Role="film" EntitySet="film" />
+          </AssociationSet>
+          <AssociationSet Name="fk_film_language_original" Association="Self.fk_film_language_original">
+            <End Role="language" EntitySet="language" />
+            <End Role="film" EntitySet="film" />
+          </AssociationSet>
+          <AssociationSet Name="fk_inventory_film" Association="Self.fk_inventory_film">
+            <End Role="film" EntitySet="film" />
+            <End Role="inventory" EntitySet="inventory" />
+          </AssociationSet>
+          <AssociationSet Name="fk_inventory_store" Association="Self.fk_inventory_store">
+            <End Role="store" EntitySet="store" />
+            <End Role="inventory" EntitySet="inventory" />
+          </AssociationSet>
+          <AssociationSet Name="fk_payment_customer" Association="Self.fk_payment_customer">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="payment" EntitySet="payment" />
+          </AssociationSet>
+          <AssociationSet Name="fk_payment_rental" Association="Self.fk_payment_rental">
+            <End Role="rental" EntitySet="rental" />
+            <End Role="payment" EntitySet="payment" />
+          </AssociationSet>
+          <AssociationSet Name="fk_payment_staff" Association="Self.fk_payment_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="payment" EntitySet="payment" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rental_customer" Association="Self.fk_rental_customer">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="rental" EntitySet="rental" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rental_inventory" Association="Self.fk_rental_inventory">
+            <End Role="inventory" EntitySet="inventory" />
+            <End Role="rental" EntitySet="rental" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rental_staff" Association="Self.fk_rental_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="rental" EntitySet="rental" />
+          </AssociationSet>
+          <AssociationSet Name="fk_staff_address" Association="Self.fk_staff_address">
+            <End Role="address" EntitySet="address" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="fk_staff_store" Association="Self.fk_staff_store">
+            <End Role="store" EntitySet="store" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="fk_store_address" Association="Self.fk_store_address">
+            <End Role="address" EntitySet="address" />
+            <End Role="store" EntitySet="store" />
+          </AssociationSet>
+          <AssociationSet Name="fk_store_staff" Association="Self.fk_store_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="store" EntitySet="store" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Group" Association="Self.FK_User_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SakilaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="actor">
+          <Key>
+            <PropertyRef Name="actor_id" />
+          </Key>
+          <Property Name="actor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="film_actor" Relationship="Self.fk_film_actor_actor" FromRole="actor" ToRole="film_actor" />
+        </EntityType>
+        <EntityType Name="address">
+          <Key>
+            <PropertyRef Name="address_id" />
+          </Key>
+          <Property Name="address_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="district" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city_id" Type="Int32" Nullable="false" />
+          <Property Name="postal_code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="city" Relationship="Self.fk_address_city" FromRole="address" ToRole="city" />
+          <NavigationProperty Name="customers" Relationship="Self.fk_customer_address" FromRole="address" ToRole="customer" />
+          <NavigationProperty Name="staffs" Relationship="Self.fk_staff_address" FromRole="address" ToRole="staff" />
+          <NavigationProperty Name="stores" Relationship="Self.fk_store_address" FromRole="address" ToRole="store" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="film_category" Relationship="Self.fk_film_category_category" FromRole="category" ToRole="film_category" />
+        </EntityType>
+        <EntityType Name="city">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="city_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="city1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="country_id" Type="Int16" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="addresses" Relationship="Self.fk_address_city" FromRole="city" ToRole="address" />
+          <NavigationProperty Name="country" Relationship="Self.fk_city_country" FromRole="city" ToRole="country" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="country_id" />
+          </Key>
+          <Property Name="country_id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="cities" Relationship="Self.fk_city_country" FromRole="country" ToRole="city" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="store_id" Type="Int32" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address_id" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="address" Relationship="Self.fk_customer_address" FromRole="customer" ToRole="address" />
+          <NavigationProperty Name="store" Relationship="Self.fk_customer_store" FromRole="customer" ToRole="store" />
+          <NavigationProperty Name="payments" Relationship="Self.fk_payment_customer" FromRole="customer" ToRole="payment" />
+          <NavigationProperty Name="rentals" Relationship="Self.fk_rental_customer" FromRole="customer" ToRole="rental" />
+        </EntityType>
+        <EntityType Name="film">
+          <Key>
+            <PropertyRef Name="film_id" />
+          </Key>
+          <Property Name="film_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="release_year" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="language_id" Type="Byte" Nullable="false" />
+          <Property Name="original_language_id" Type="Byte" />
+          <Property Name="rental_duration" Type="Byte" Nullable="false" />
+          <Property Name="rental_rate" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="length" Type="Int16" />
+          <Property Name="replacement_cost" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="rating" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="special_features" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="film_actor" Relationship="Self.fk_film_actor_film" FromRole="film" ToRole="film_actor" />
+          <NavigationProperty Name="film_category" Relationship="Self.fk_film_category_film" FromRole="film" ToRole="film_category" />
+          <NavigationProperty Name="language" Relationship="Self.fk_film_language" FromRole="film" ToRole="language" />
+          <NavigationProperty Name="language1" Relationship="Self.fk_film_language_original" FromRole="film" ToRole="language" />
+          <NavigationProperty Name="inventories" Relationship="Self.fk_inventory_film" FromRole="film" ToRole="inventory" />
+        </EntityType>
+        <EntityType Name="film_actor">
+          <Key>
+            <PropertyRef Name="actor_id" />
+            <PropertyRef Name="film_id" />
+          </Key>
+          <Property Name="actor_id" Type="Int32" Nullable="false" />
+          <Property Name="film_id" Type="Int32" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="actor" Relationship="Self.fk_film_actor_actor" FromRole="film_actor" ToRole="actor" />
+          <NavigationProperty Name="film" Relationship="Self.fk_film_actor_film" FromRole="film_actor" ToRole="film" />
+        </EntityType>
+        <EntityType Name="film_category">
+          <Key>
+            <PropertyRef Name="film_id" />
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="film_id" Type="Int32" Nullable="false" />
+          <Property Name="category_id" Type="Byte" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="category" Relationship="Self.fk_film_category_category" FromRole="film_category" ToRole="category" />
+          <NavigationProperty Name="film" Relationship="Self.fk_film_category_film" FromRole="film_category" ToRole="film" />
+        </EntityType>
+        <EntityType Name="film_text">
+          <Key>
+            <PropertyRef Name="film_id" />
+          </Key>
+          <Property Name="film_id" Type="Int16" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="inventory">
+          <Key>
+            <PropertyRef Name="inventory_id" />
+          </Key>
+          <Property Name="inventory_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="film_id" Type="Int32" Nullable="false" />
+          <Property Name="store_id" Type="Int32" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="film" Relationship="Self.fk_inventory_film" FromRole="inventory" ToRole="film" />
+          <NavigationProperty Name="store" Relationship="Self.fk_inventory_store" FromRole="inventory" ToRole="store" />
+          <NavigationProperty Name="rentals" Relationship="Self.fk_rental_inventory" FromRole="inventory" ToRole="rental" />
+        </EntityType>
+        <EntityType Name="language">
+          <Key>
+            <PropertyRef Name="language_id" />
+          </Key>
+          <Property Name="language_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="films" Relationship="Self.fk_film_language" FromRole="language" ToRole="film" />
+          <NavigationProperty Name="films1" Relationship="Self.fk_film_language_original" FromRole="language" ToRole="film" />
+        </EntityType>
+        <EntityType Name="payment">
+          <Key>
+            <PropertyRef Name="payment_id" />
+          </Key>
+          <Property Name="payment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="staff_id" Type="Byte" Nullable="false" />
+          <Property Name="rental_id" Type="Int32" />
+          <Property Name="amount" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="payment_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="customer" Relationship="Self.fk_payment_customer" FromRole="payment" ToRole="customer" />
+          <NavigationProperty Name="rental" Relationship="Self.fk_payment_rental" FromRole="payment" ToRole="rental" />
+          <NavigationProperty Name="staff" Relationship="Self.fk_payment_staff" FromRole="payment" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="rental">
+          <Key>
+            <PropertyRef Name="rental_id" />
+          </Key>
+          <Property Name="rental_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rental_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="inventory_id" Type="Int32" Nullable="false" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="return_date" Type="DateTime" Precision="3" />
+          <Property Name="staff_id" Type="Byte" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="customer" Relationship="Self.fk_rental_customer" FromRole="rental" ToRole="customer" />
+          <NavigationProperty Name="inventory" Relationship="Self.fk_rental_inventory" FromRole="rental" ToRole="inventory" />
+          <NavigationProperty Name="payments" Relationship="Self.fk_payment_rental" FromRole="rental" ToRole="payment" />
+          <NavigationProperty Name="staff" Relationship="Self.fk_rental_staff" FromRole="rental" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="staff_id" />
+          </Key>
+          <Property Name="staff_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address_id" Type="Int32" Nullable="false" />
+          <Property Name="picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="store_id" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="address" Relationship="Self.fk_staff_address" FromRole="staff" ToRole="address" />
+          <NavigationProperty Name="payments" Relationship="Self.fk_payment_staff" FromRole="staff" ToRole="payment" />
+          <NavigationProperty Name="rentals" Relationship="Self.fk_rental_staff" FromRole="staff" ToRole="rental" />
+          <NavigationProperty Name="store" Relationship="Self.fk_staff_store" FromRole="staff" ToRole="store" />
+          <NavigationProperty Name="stores" Relationship="Self.fk_store_staff" FromRole="staff" ToRole="store" />
+        </EntityType>
+        <EntityType Name="store">
+          <Key>
+            <PropertyRef Name="store_id" />
+          </Key>
+          <Property Name="store_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="manager_staff_id" Type="Byte" Nullable="false" />
+          <Property Name="address_id" Type="Int32" Nullable="false" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="address" Relationship="Self.fk_store_address" FromRole="store" ToRole="address" />
+          <NavigationProperty Name="customers" Relationship="Self.fk_customer_store" FromRole="store" ToRole="customer" />
+          <NavigationProperty Name="inventories" Relationship="Self.fk_inventory_store" FromRole="store" ToRole="inventory" />
+          <NavigationProperty Name="staffs" Relationship="Self.fk_staff_store" FromRole="store" ToRole="staff" />
+          <NavigationProperty Name="staff" Relationship="Self.fk_store_staff" FromRole="store" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="customer_list">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="phone" />
+            <PropertyRef Name="city" />
+            <PropertyRef Name="country" />
+            <PropertyRef Name="notes" />
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="91" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="zip_code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="notes" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="film_list">
+          <Key>
+            <PropertyRef Name="category" />
+            <PropertyRef Name="actors" />
+          </Key>
+          <Property Name="FID" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="category" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="length" Type="Int16" />
+          <Property Name="rating" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="actors" Type="String" MaxLength="91" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sales_by_film_category">
+          <Key>
+            <PropertyRef Name="category" />
+          </Key>
+          <Property Name="category" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="total_sales" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="sales_by_store">
+          <Key>
+            <PropertyRef Name="store_id" />
+            <PropertyRef Name="store" />
+            <PropertyRef Name="manager" />
+          </Key>
+          <Property Name="store_id" Type="Int32" Nullable="false" />
+          <Property Name="store" Type="String" MaxLength="101" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="manager" Type="String" MaxLength="91" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="total_sales" Type="Decimal" Precision="38" Scale="2" />
+        </EntityType>
+        <EntityType Name="staff_list">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="phone" />
+            <PropertyRef Name="city" />
+            <PropertyRef Name="country" />
+            <PropertyRef Name="SID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="91" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="zip_code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_film_actor_actor">
+          <End Role="actor" Type="Self.actor" Multiplicity="1" />
+          <End Role="film_actor" Type="Self.film_actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="actor">
+              <PropertyRef Name="actor_id" />
+            </Principal>
+            <Dependent Role="film_actor">
+              <PropertyRef Name="actor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_address_city">
+          <End Role="city" Type="Self.city" Multiplicity="1" />
+          <End Role="address" Type="Self.address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="address">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_customer_address">
+          <End Role="address" Type="Self.address" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_staff_address">
+          <End Role="address" Type="Self.address" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_store_address">
+          <End Role="address" Type="Self.address" Multiplicity="1" />
+          <End Role="store" Type="Self.store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="address">
+              <PropertyRef Name="address_id" />
+            </Principal>
+            <Dependent Role="store">
+              <PropertyRef Name="address_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_film_category_category">
+          <End Role="category" Type="Self.category" Multiplicity="1" />
+          <End Role="film_category" Type="Self.film_category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="film_category">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_city_country">
+          <End Role="country" Type="Self.country" Multiplicity="1" />
+          <End Role="city" Type="Self.city" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="country_id" />
+            </Principal>
+            <Dependent Role="city">
+              <PropertyRef Name="country_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_customer_store">
+          <End Role="store" Type="Self.store" Multiplicity="1" />
+          <End Role="customer" Type="Self.customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="store">
+              <PropertyRef Name="store_id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_payment_customer">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rental_customer">
+          <End Role="customer" Type="Self.customer" Multiplicity="1" />
+          <End Role="rental" Type="Self.rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="rental">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_film_actor_film">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="film_actor" Type="Self.film_actor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="film_id" />
+            </Principal>
+            <Dependent Role="film_actor">
+              <PropertyRef Name="film_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_film_category_film">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="film_category" Type="Self.film_category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="film_id" />
+            </Principal>
+            <Dependent Role="film_category">
+              <PropertyRef Name="film_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_film_language">
+          <End Role="language" Type="Self.language" Multiplicity="1" />
+          <End Role="film" Type="Self.film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="language">
+              <PropertyRef Name="language_id" />
+            </Principal>
+            <Dependent Role="film">
+              <PropertyRef Name="language_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_film_language_original">
+          <End Role="language" Type="Self.language" Multiplicity="0..1" />
+          <End Role="film" Type="Self.film" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="language">
+              <PropertyRef Name="language_id" />
+            </Principal>
+            <Dependent Role="film">
+              <PropertyRef Name="original_language_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_inventory_film">
+          <End Role="film" Type="Self.film" Multiplicity="1" />
+          <End Role="inventory" Type="Self.inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="film">
+              <PropertyRef Name="film_id" />
+            </Principal>
+            <Dependent Role="inventory">
+              <PropertyRef Name="film_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_inventory_store">
+          <End Role="store" Type="Self.store" Multiplicity="1" />
+          <End Role="inventory" Type="Self.inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="store">
+              <PropertyRef Name="store_id" />
+            </Principal>
+            <Dependent Role="inventory">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rental_inventory">
+          <End Role="inventory" Type="Self.inventory" Multiplicity="1" />
+          <End Role="rental" Type="Self.rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="inventory">
+              <PropertyRef Name="inventory_id" />
+            </Principal>
+            <Dependent Role="rental">
+              <PropertyRef Name="inventory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_payment_rental">
+          <End Role="rental" Type="Self.rental" Multiplicity="0..1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rental">
+              <PropertyRef Name="rental_id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="rental_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_payment_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="payment" Type="Self.payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="payment">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rental_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="rental" Type="Self.rental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="rental">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_staff_store">
+          <End Role="store" Type="Self.store" Multiplicity="1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="store">
+              <PropertyRef Name="store_id" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_store_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="store" Type="Self.store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="store">
+              <PropertyRef Name="manager_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SakilaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="actors" EntityType="Self.actor" />
+          <EntitySet Name="addresses" EntityType="Self.address" />
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="cities" EntityType="Self.city" />
+          <EntitySet Name="countries" EntityType="Self.country" />
+          <EntitySet Name="customers" EntityType="Self.customer" />
+          <EntitySet Name="films" EntityType="Self.film" />
+          <EntitySet Name="film_actor" EntityType="Self.film_actor" />
+          <EntitySet Name="film_category" EntityType="Self.film_category" />
+          <EntitySet Name="film_text" EntityType="Self.film_text" />
+          <EntitySet Name="inventories" EntityType="Self.inventory" />
+          <EntitySet Name="languages" EntityType="Self.language" />
+          <EntitySet Name="payments" EntityType="Self.payment" />
+          <EntitySet Name="rentals" EntityType="Self.rental" />
+          <EntitySet Name="staffs" EntityType="Self.staff" />
+          <EntitySet Name="stores" EntityType="Self.store" />
+          <EntitySet Name="customer_list" EntityType="Self.customer_list" />
+          <EntitySet Name="film_list" EntityType="Self.film_list" />
+          <EntitySet Name="sales_by_film_category" EntityType="Self.sales_by_film_category" />
+          <EntitySet Name="sales_by_store" EntityType="Self.sales_by_store" />
+          <EntitySet Name="staff_list" EntityType="Self.staff_list" />
+          <AssociationSet Name="fk_film_actor_actor" Association="Self.fk_film_actor_actor">
+            <End Role="actor" EntitySet="actors" />
+            <End Role="film_actor" EntitySet="film_actor" />
+          </AssociationSet>
+          <AssociationSet Name="fk_address_city" Association="Self.fk_address_city">
+            <End Role="city" EntitySet="cities" />
+            <End Role="address" EntitySet="addresses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_customer_address" Association="Self.fk_customer_address">
+            <End Role="address" EntitySet="addresses" />
+            <End Role="customer" EntitySet="customers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_staff_address" Association="Self.fk_staff_address">
+            <End Role="address" EntitySet="addresses" />
+            <End Role="staff" EntitySet="staffs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_store_address" Association="Self.fk_store_address">
+            <End Role="address" EntitySet="addresses" />
+            <End Role="store" EntitySet="stores" />
+          </AssociationSet>
+          <AssociationSet Name="fk_film_category_category" Association="Self.fk_film_category_category">
+            <End Role="category" EntitySet="categories" />
+            <End Role="film_category" EntitySet="film_category" />
+          </AssociationSet>
+          <AssociationSet Name="fk_city_country" Association="Self.fk_city_country">
+            <End Role="country" EntitySet="countries" />
+            <End Role="city" EntitySet="cities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_customer_store" Association="Self.fk_customer_store">
+            <End Role="store" EntitySet="stores" />
+            <End Role="customer" EntitySet="customers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_payment_customer" Association="Self.fk_payment_customer">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="payment" EntitySet="payments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rental_customer" Association="Self.fk_rental_customer">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="rental" EntitySet="rentals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_film_actor_film" Association="Self.fk_film_actor_film">
+            <End Role="film" EntitySet="films" />
+            <End Role="film_actor" EntitySet="film_actor" />
+          </AssociationSet>
+          <AssociationSet Name="fk_film_category_film" Association="Self.fk_film_category_film">
+            <End Role="film" EntitySet="films" />
+            <End Role="film_category" EntitySet="film_category" />
+          </AssociationSet>
+          <AssociationSet Name="fk_film_language" Association="Self.fk_film_language">
+            <End Role="language" EntitySet="languages" />
+            <End Role="film" EntitySet="films" />
+          </AssociationSet>
+          <AssociationSet Name="fk_film_language_original" Association="Self.fk_film_language_original">
+            <End Role="language" EntitySet="languages" />
+            <End Role="film" EntitySet="films" />
+          </AssociationSet>
+          <AssociationSet Name="fk_inventory_film" Association="Self.fk_inventory_film">
+            <End Role="film" EntitySet="films" />
+            <End Role="inventory" EntitySet="inventories" />
+          </AssociationSet>
+          <AssociationSet Name="fk_inventory_store" Association="Self.fk_inventory_store">
+            <End Role="store" EntitySet="stores" />
+            <End Role="inventory" EntitySet="inventories" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rental_inventory" Association="Self.fk_rental_inventory">
+            <End Role="inventory" EntitySet="inventories" />
+            <End Role="rental" EntitySet="rentals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_payment_rental" Association="Self.fk_payment_rental">
+            <End Role="rental" EntitySet="rentals" />
+            <End Role="payment" EntitySet="payments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_payment_staff" Association="Self.fk_payment_staff">
+            <End Role="staff" EntitySet="staffs" />
+            <End Role="payment" EntitySet="payments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rental_staff" Association="Self.fk_rental_staff">
+            <End Role="staff" EntitySet="staffs" />
+            <End Role="rental" EntitySet="rentals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_staff_store" Association="Self.fk_staff_store">
+            <End Role="store" EntitySet="stores" />
+            <End Role="staff" EntitySet="staffs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_store_staff" Association="Self.fk_store_staff">
+            <End Role="staff" EntitySet="staffs" />
+            <End Role="store" EntitySet="stores" />
+          </AssociationSet>
+          <EntitySet Name="Groups" EntityType="SakilaModel.Group" />
+          <EntitySet Name="Users" EntityType="SakilaModel.User" />
+          <AssociationSet Name="FK_User_Group" Association="SakilaModel.FK_User_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="SakilaModel.FK_User_Group" FromRole="Group" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="SakilaModel.FK_User_Group" FromRole="User" ToRole="Group" />
+        </EntityType>
+        <Association Name="FK_User_Group">
+          <End Type="SakilaModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="SakilaModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SakilaModelStoreContainer" CdmEntityContainer="SakilaEntities">
+          <EntitySetMapping Name="actors">
+            <EntityTypeMapping TypeName="SakilaModel.actor">
+              <MappingFragment StoreEntitySet="actor">
+                <ScalarProperty Name="actor_id" ColumnName="actor_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="addresses">
+            <EntityTypeMapping TypeName="SakilaModel.address">
+              <MappingFragment StoreEntitySet="address">
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="address1" ColumnName="address" />
+                <ScalarProperty Name="address2" ColumnName="address2" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="SakilaModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cities">
+            <EntityTypeMapping TypeName="SakilaModel.city">
+              <MappingFragment StoreEntitySet="city">
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="city1" ColumnName="city" />
+                <ScalarProperty Name="country_id" ColumnName="country_id" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="countries">
+            <EntityTypeMapping TypeName="SakilaModel.country">
+              <MappingFragment StoreEntitySet="country">
+                <ScalarProperty Name="country_id" ColumnName="country_id" />
+                <ScalarProperty Name="country1" ColumnName="country" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="SakilaModel.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="films">
+            <EntityTypeMapping TypeName="SakilaModel.film">
+              <MappingFragment StoreEntitySet="film">
+                <ScalarProperty Name="film_id" ColumnName="film_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="release_year" ColumnName="release_year" />
+                <ScalarProperty Name="language_id" ColumnName="language_id" />
+                <ScalarProperty Name="original_language_id" ColumnName="original_language_id" />
+                <ScalarProperty Name="rental_duration" ColumnName="rental_duration" />
+                <ScalarProperty Name="rental_rate" ColumnName="rental_rate" />
+                <ScalarProperty Name="length" ColumnName="length" />
+                <ScalarProperty Name="replacement_cost" ColumnName="replacement_cost" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="special_features" ColumnName="special_features" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="film_actor">
+            <EntityTypeMapping TypeName="SakilaModel.film_actor">
+              <MappingFragment StoreEntitySet="film_actor">
+                <ScalarProperty Name="actor_id" ColumnName="actor_id" />
+                <ScalarProperty Name="film_id" ColumnName="film_id" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="film_category">
+            <EntityTypeMapping TypeName="SakilaModel.film_category">
+              <MappingFragment StoreEntitySet="film_category">
+                <ScalarProperty Name="film_id" ColumnName="film_id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="film_text">
+            <EntityTypeMapping TypeName="SakilaModel.film_text">
+              <MappingFragment StoreEntitySet="film_text">
+                <ScalarProperty Name="film_id" ColumnName="film_id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inventories">
+            <EntityTypeMapping TypeName="SakilaModel.inventory">
+              <MappingFragment StoreEntitySet="inventory">
+                <ScalarProperty Name="inventory_id" ColumnName="inventory_id" />
+                <ScalarProperty Name="film_id" ColumnName="film_id" />
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="languages">
+            <EntityTypeMapping TypeName="SakilaModel.language">
+              <MappingFragment StoreEntitySet="language">
+                <ScalarProperty Name="language_id" ColumnName="language_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payments">
+            <EntityTypeMapping TypeName="SakilaModel.payment">
+              <MappingFragment StoreEntitySet="payment">
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+                <ScalarProperty Name="rental_id" ColumnName="rental_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rentals">
+            <EntityTypeMapping TypeName="SakilaModel.rental">
+              <MappingFragment StoreEntitySet="rental">
+                <ScalarProperty Name="rental_id" ColumnName="rental_id" />
+                <ScalarProperty Name="rental_date" ColumnName="rental_date" />
+                <ScalarProperty Name="inventory_id" ColumnName="inventory_id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="return_date" ColumnName="return_date" />
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staffs">
+            <EntityTypeMapping TypeName="SakilaModel.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stores">
+            <EntityTypeMapping TypeName="SakilaModel.store">
+              <MappingFragment StoreEntitySet="store">
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+                <ScalarProperty Name="manager_staff_id" ColumnName="manager_staff_id" />
+                <ScalarProperty Name="address_id" ColumnName="address_id" />
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customer_list">
+            <EntityTypeMapping TypeName="SakilaModel.customer_list">
+              <MappingFragment StoreEntitySet="customer_list">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="zip_code" ColumnName="zip_code" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="film_list">
+            <EntityTypeMapping TypeName="SakilaModel.film_list">
+              <MappingFragment StoreEntitySet="film_list">
+                <ScalarProperty Name="FID" ColumnName="FID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="length" ColumnName="length" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="actors" ColumnName="actors" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sales_by_film_category">
+            <EntityTypeMapping TypeName="SakilaModel.sales_by_film_category">
+              <MappingFragment StoreEntitySet="sales_by_film_category">
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="total_sales" ColumnName="total_sales" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sales_by_store">
+            <EntityTypeMapping TypeName="SakilaModel.sales_by_store">
+              <MappingFragment StoreEntitySet="sales_by_store">
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+                <ScalarProperty Name="store" ColumnName="store" />
+                <ScalarProperty Name="manager" ColumnName="manager" />
+                <ScalarProperty Name="total_sales" ColumnName="total_sales" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staff_list">
+            <EntityTypeMapping TypeName="SakilaModel.staff_list">
+              <MappingFragment StoreEntitySet="staff_list">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="zip_code" ColumnName="zip_code" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="SID" ColumnName="SID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="SakilaModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SakilaModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
