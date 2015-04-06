@@ -12,18 +12,22 @@ namespace Luis.MasteringExtJs.WebApi.Repository
     using System;
     using System.Collections.Generic;
     
-    public partial class Group
+    public partial class Menu
     {
-        public Group()
+        public Menu()
         {
-            this.Users = new HashSet<User>();
+            this.Menu1 = new HashSet<Menu>();
             this.Permissions = new HashSet<Permission>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Text { get; set; }
+        public string Iconcls { get; set; }
+        public string ClassName { get; set; }
+        public Nullable<int> MenuId { get; set; }
     
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Menu> Menu1 { get; set; }
+        public virtual Menu Menu2 { get; set; }
         public virtual ICollection<Permission> Permissions { get; set; }
     }
 }

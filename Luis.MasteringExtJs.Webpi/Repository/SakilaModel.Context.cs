@@ -48,5 +48,7 @@ namespace Luis.MasteringExtJs.WebApi.Repository
         public virtual DbSet<staff_list> staff_list { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Menu> Menus { get; set; }
+        public virtual DbSet<Permission> Permissions { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Luis.MasteringExtJs.WebApi.Handlers;
+using Luis.MasteringExtJs.WebApi.Mapping;
 using Luis.MasteringExtJs.WebApi.Repository;
 
 namespace Luis.MasteringExtJs.WebApi
@@ -19,6 +20,7 @@ namespace Luis.MasteringExtJs.WebApi
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
         
             builder.RegisterType<AuthenticationHandler>().As<IAuthenticationHandler>().InstancePerLifetimeScope();
+            builder.RegisterType<MenuHandler>().As<IMenuHandler>().InstancePerLifetimeScope();
             builder.Register(x => new SakilaEntities()).InstancePerLifetimeScope();
 
             var container = builder.Build();
@@ -26,6 +28,8 @@ namespace Luis.MasteringExtJs.WebApi
             var resolver = new AutofacWebApiDependencyResolver(container);
 
             GlobalConfiguration.Configuration.DependencyResolver = resolver;
+
+            AutoMapperWebConfiguration.Configure();
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

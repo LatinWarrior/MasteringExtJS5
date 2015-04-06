@@ -134,6 +134,16 @@
           <Property Name="name" Type="char" MaxLength="20" Nullable="false" />
           <Property Name="last_update" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Iconcls" Type="nvarchar" MaxLength="30" />
+          <Property Name="ClassName" Type="nvarchar" MaxLength="100" />
+          <Property Name="MenuId" Type="int" />
+        </EntityType>
         <EntityType Name="payment">
           <Key>
             <PropertyRef Name="payment_id" />
@@ -145,6 +155,14 @@
           <Property Name="amount" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="payment_date" Type="datetime" Nullable="false" />
           <Property Name="last_update" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="rental">
           <Key>
@@ -421,6 +439,18 @@ warning 6002: The table/view 'Sakila.dbo.staff_list' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Menu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_payment_customer">
           <End Role="customer" Type="Self.customer" Multiplicity="1" />
           <End Role="payment" Type="Self.payment" Multiplicity="*" />
@@ -454,6 +484,30 @@ warning 6002: The table/view 'Sakila.dbo.staff_list' does not have a primary key
             </Principal>
             <Dependent Role="payment">
               <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Permission" Type="Self.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Permission" Type="Self.Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="MenuId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -567,7 +621,9 @@ warning 6002: The table/view 'Sakila.dbo.staff_list' does not have a primary key
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="inventory" EntityType="Self.inventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="language" EntityType="Self.language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="payment" EntityType="Self.payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permission" EntityType="Self.Permission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rental" EntityType="Self.rental" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="store" EntityType="Self.store" Schema="dbo" store:Type="Tables" />
@@ -671,6 +727,10 @@ warning 6002: The table/view 'Sakila.dbo.staff_list' does not have a primary key
             <End Role="store" EntitySet="store" />
             <End Role="inventory" EntitySet="inventory" />
           </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
           <AssociationSet Name="fk_payment_customer" Association="Self.fk_payment_customer">
             <End Role="customer" EntitySet="customer" />
             <End Role="payment" EntitySet="payment" />
@@ -682,6 +742,14 @@ warning 6002: The table/view 'Sakila.dbo.staff_list' does not have a primary key
           <AssociationSet Name="fk_payment_staff" Association="Self.fk_payment_staff">
             <End Role="staff" EntitySet="staff" />
             <End Role="payment" EntitySet="payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_Group" Association="Self.FK_Permission_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Permission" EntitySet="Permission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_Menu" Association="Self.FK_Permission_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Permission" EntitySet="Permission" />
           </AssociationSet>
           <AssociationSet Name="fk_rental_customer" Association="Self.fk_rental_customer">
             <End Role="customer" EntitySet="customer" />
@@ -1387,6 +1455,20 @@ warning 6002: The table/view 'Sakila.dbo.staff_list' does not have a primary key
             <End Role="Group" EntitySet="Groups" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <EntitySet Name="Menus" EntityType="SakilaModel.Menu" />
+          <EntitySet Name="Permissions" EntityType="SakilaModel.Permission" />
+          <AssociationSet Name="FK_Permission_Group" Association="SakilaModel.FK_Permission_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu" Association="SakilaModel.FK_Menu_Menu">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Menu1" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Permission_Menu" Association="SakilaModel.FK_Permission_Menu">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Permission" EntitySet="Permissions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Group">
           <Key>
@@ -1395,6 +1477,7 @@ warning 6002: The table/view 'Sakila.dbo.staff_list' does not have a primary key
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="SakilaModel.FK_User_Group" FromRole="Group" ToRole="User" />
+          <NavigationProperty Name="Permissions" Relationship="SakilaModel.FK_Permission_Group" FromRole="Group" ToRole="Permission" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1418,6 +1501,65 @@ warning 6002: The table/view 'Sakila.dbo.staff_list' does not have a primary key
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Iconcls" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MenuId" Type="Int32" />
+          <NavigationProperty Name="Menu1" Relationship="SakilaModel.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
+          <NavigationProperty Name="Menu2" Relationship="SakilaModel.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
+          <NavigationProperty Name="Permissions" Relationship="SakilaModel.FK_Permission_Menu" FromRole="Menu" ToRole="Permission" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="SakilaModel.FK_Permission_Group" FromRole="Permission" ToRole="Group" />
+          <NavigationProperty Name="Menu" Relationship="SakilaModel.FK_Permission_Menu" FromRole="Permission" ToRole="Menu" />
+        </EntityType>
+        <Association Name="FK_Permission_Group">
+          <End Type="SakilaModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="SakilaModel.Permission" Role="Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Menu">
+          <End Type="SakilaModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="SakilaModel.Menu" Role="Menu1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Permission_Menu">
+          <End Type="SakilaModel.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="SakilaModel.Permission" Role="Permission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Permission">
+              <PropertyRef Name="MenuId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1690,6 +1832,26 @@ warning 6002: The table/view 'Sakila.dbo.staff_list' does not have a primary key
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="SakilaModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="Iconcls" ColumnName="Iconcls" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="SakilaModel.Permission">
+              <MappingFragment StoreEntitySet="Permission">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

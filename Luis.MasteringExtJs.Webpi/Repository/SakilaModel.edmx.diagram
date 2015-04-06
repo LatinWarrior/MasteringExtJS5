@@ -51,6 +51,11 @@
         <EntityTypeShape EntityType="SakilaModel.Group" Width="1.5" PointX="3.375" PointY="11.375" />
         <EntityTypeShape EntityType="SakilaModel.User" Width="1.5" PointX="5.625" PointY="11" />
         <AssociationConnector Association="SakilaModel.FK_User_Group" />
+        <EntityTypeShape EntityType="SakilaModel.Menu" Width="1.5" PointX="0.75" PointY="15" />
+        <EntityTypeShape EntityType="SakilaModel.Permission" Width="1.5" PointX="6" PointY="14.5" />
+        <AssociationConnector Association="SakilaModel.FK_Permission_Group" />
+        <AssociationConnector Association="SakilaModel.FK_Menu_Menu" />
+        <AssociationConnector Association="SakilaModel.FK_Permission_Menu" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
