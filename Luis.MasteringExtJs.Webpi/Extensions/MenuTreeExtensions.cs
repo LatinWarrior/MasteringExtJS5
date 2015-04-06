@@ -1,15 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Luis.MasteringExtJs.WebApi.Mapping;
 using Luis.MasteringExtJs.WebApi.Models;
 
 namespace Luis.MasteringExtJs.WebApi.Extensions
 {
+    /// <summary>
+    /// Credit: http://stackoverflow.com/questions/15867478/build-tree-type-list-by-recursively-checking-parent-child-relationship-c-sharp
+    /// </summary>
     public static class MenuTreeExtensions
     {
-        public static List<MenuTree> BuildTree(this List<MenuFlat> source)
+        public static List<MenuTree> BuildTree(this List<MenuTree> source)
         {
-            var groups = source.ToTree().GroupBy(i => i.MenuId);
+            var groups = source.GroupBy(i => i.MenuId);
 
             var roots = groups.FirstOrDefault(g => !g.Key.HasValue).ToList();
 

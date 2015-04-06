@@ -24,7 +24,7 @@ namespace Luis.MasteringExtJs.WebApi.Controllers
         [Route("Menus")]
         public List<MenuTree> GetMenus()
         {
-            return _menuHandler.Get().BuildTree();
+            return _menuHandler.Get().ToTree().BuildTree();
         }
 
         //// GET: api/Menus/5
