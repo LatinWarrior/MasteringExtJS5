@@ -21,6 +21,7 @@ namespace Luis.MasteringExtJs.WebApi
         
             builder.RegisterType<AuthenticationHandler>().As<IAuthenticationHandler>().InstancePerLifetimeScope();
             builder.RegisterType<MenuHandler>().As<IMenuHandler>().InstancePerLifetimeScope();
+            builder.RegisterType<UserHandler>().As<IUserHandler>().InstancePerLifetimeScope();
             builder.Register(x => new SakilaEntities()).InstancePerLifetimeScope();
 
             var container = builder.Build();

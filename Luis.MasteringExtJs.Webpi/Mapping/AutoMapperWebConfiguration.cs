@@ -7,6 +7,7 @@
             PermissionMappingExtensions.Configure();
             MenuFlatMappingExtensions.Configure();            
             MenuTreeMappingExtensions.Configure();
+            UserMappingExtensions.Configure();
         }
     }
 }

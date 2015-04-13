@@ -248,11 +248,13 @@
     </Compile>
     <Compile Include="Handlers\AuthenticationHandler.cs" />
     <Compile Include="Handlers\MenuHandler.cs" />
+    <Compile Include="Handlers\UserHandler.cs" />
     <Compile Include="Mapping\AutoMapperWebConfiguration.cs" />
     <Compile Include="Mapping\ItemMappingExtensions.cs" />
     <Compile Include="Mapping\MenuFlatMappingExtensions.cs" />
     <Compile Include="Mapping\MenuTreeMappingExtensions.cs" />
     <Compile Include="Mapping\PermissionMappingExtensions.cs" />
+    <Compile Include="Mapping\UserMappingExtensions.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AuthTicket.cs" />
